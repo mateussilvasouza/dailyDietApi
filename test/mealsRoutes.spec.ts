@@ -1,4 +1,4 @@
-import { describe, it, beforeAll, afterEach, beforeEach, afterAll, expect } from 'vitest'
+import { describe, it, beforeAll, afterEach, beforeEach, afterAll, expect, expectTypeOf } from 'vitest'
 import { execSync } from 'node:child_process'
 import { app } from '../src/app'
 import request from 'supertest'
@@ -284,5 +284,47 @@ describe('MealsRoutes', () => {
         diet: true
       })
     ])
+  })
+
+  it('must be possible to retrieve a user\'s metrics.', async () => {
+    interface summaryProps {
+      diet: number
+      noDiet: number
+      total: number
+    }
+
+    await request(app.server)
+      .post('/users')
+      .send({
+        name: 'Julius',
+        cpf: '11111111111',
+        password: '12345'
+      })
+
+    const login = await request(app.server)
+      .post('/login')
+      .send({
+        login: '11111111111',
+        password: '12345'
+      })
+
+    const token = login.get('Set-Cookie')
+
+    await request(app.server)
+      .post('/meals')
+      .set('Cookie', token)
+      .send({
+        name: 'Mamão',
+        description: 'Lanche da Tarde',
+        consumedAt: new Date(),
+        diet: true
+      })
+
+    const summary = await request(app.server)
+      .get('/meals/summary')
+      .set('Cookie', token)
+      .expect(200)
+
+    expectTypeOf(summary.body.summary).toMatchTypeOf<summaryProps[]>()
   })
 })

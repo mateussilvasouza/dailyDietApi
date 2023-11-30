@@ -86,11 +86,11 @@ export async function mealsRoutes (app: FastifyInstance): Promise<void> {
   app.get('/summary', { preHandler: [decrypt] }, async (request, reply) => {
     try {
       const { id: userId } = request.headers.user as unknown as IdentifyProps
-      const summary = await db('meals').where('deleted_at', null).andWhere('user_id', userId).select(db.raw('count (*) filter (where diet = true) as diet'),
+      const response = await db('meals').where('deleted_at', null).andWhere('user_id', userId).select(db.raw('count (*) filter (where diet = true) as diet'),
         db.raw('count (*) filter (where diet = false) as noDiet'),
         db.raw('count (*) as total'))
 
-      return await reply.status(200).send(summary)
+      return await reply.status(200).send({ summary: response })
     } catch (error) {
       app.log.error(error)
       return await reply.status(500).send()
