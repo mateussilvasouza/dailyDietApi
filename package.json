@@ -13,7 +13,8 @@
     "migrate-rollback": "node --import tsx ./node_modules/.bin/knex -- migrate:rollback",
     "migrate-status": "node --import tsx ./node_modules/.bin/knex -- migrate:status",
     "dev": "tsx watch src/server.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "tsup": "tsup src --out-dir ./build"
   },
   "author": "",
   "license": "ISC",
@@ -40,6 +41,7 @@
     "eslint-plugin-promise": "^6.1.1",
     "sqlite3": "^5.1.6",
     "supertest": "^6.3.3",
+    "tsup": "^8.0.1",
     "tsx": "^4.1.2",
     "typescript": "^5.2.2",
     "vitest": "^0.34.6"
