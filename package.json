@@ -14,7 +14,7 @@
     "migrate-status": "node --import tsx ./node_modules/.bin/knex -- migrate:status",
     "dev": "tsx watch src/server.ts",
     "test": "vitest",
-    "tsup": "tsup src --out-dir ./build"
+    "build": "tsup src --out-dir ./build"
   },
   "author": "",
   "license": "ISC",
