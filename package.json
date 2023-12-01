@@ -4,6 +4,9 @@
   "description": "",
   "type": "module",
   "main": "index.js",
+  "engines":{
+    "node":"20"
+  },
   "scripts": {
     "knex": "node --import tsx ./node_modules/.bin/knex",
     "migrate-make": "node --import tsx ./node_modules/.bin/knex -- migrate:make",
@@ -14,7 +17,7 @@
     "migrate-status": "node --import tsx ./node_modules/.bin/knex -- migrate:status",
     "dev": "tsx watch src/server.ts",
     "test": "vitest",
-    "build": "tsup src --out-dir ./build"
+    "build": "tsup src --out-dir build"
   },
   "author": "",
   "license": "ISC",
