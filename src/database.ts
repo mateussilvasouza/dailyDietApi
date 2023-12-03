@@ -10,7 +10,7 @@ export const config: Knex.Config = {
     : {
         connectionString: env.DATABASE_URL,
         host: env.DB_HOST,
-        port: env.DB_PORT,
+        port: env.PORT,
         user: env.DB_USER,
         database: env.DB_NAME,
         password: env.DB_PASSWORD
