@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines":{
-    "node":"20"
+    "node":">=20 <21"
   },
   "scripts": {
     "knex": "node --import tsx ./node_modules/.bin/knex",
